@@ -30,5 +30,10 @@
 		My implementation for evaluateStep was the same as for the curve (interpolate consecutive points). evaluate1D was just repeating evaluateStep until there was a single point. The evaluate function first generates the intermediate points for each row using evaluate1D, then calls evaluate1D one final time on this column of points.<br><br>
 		<img src='part_2.png' height='400'><br><br>
 		<div class="pagebreak"> </div>
+
+		Part 3<br>
+		I computed the area-weighted normals for each face by first getting the vertex position for the current halfedge, for the next halfedge, and for the next next halfedge. This gives me all 3 vertex positions for the current face. I can then take the cross product of the p2 - p1 and p3 - p1 vectors to get the area-weighted normal for the current face. Then, I looped over all the faces (similarly to printNeighbourPositions) and summed and normalized the normals for each face to get the final result.<br>
+		<img src='part_3_flat.png' height='200'><img src='part_3_phong.png' height='200'><br><br>
+		<div class="pagebreak"> </div>
 	</body>
 </html>
