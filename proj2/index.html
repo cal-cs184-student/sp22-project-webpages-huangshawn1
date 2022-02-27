@@ -35,5 +35,10 @@
 		I computed the area-weighted normals for each face by first getting the vertex position for the current halfedge, for the next halfedge, and for the next next halfedge. This gives me all 3 vertex positions for the current face. I can then take the cross product of the p2 - p1 and p3 - p1 vectors to get the area-weighted normal for the current face. Then, I looped over all the faces (similarly to printNeighbourPositions) and summed and normalized the normals for each face to get the final result.<br>
 		<img src='part_3_flat.png' height='200'><img src='part_3_phong.png' height='200'><br><br>
 		<div class="pagebreak"> </div>
+
+		Part 4<br>
+		I drew out two diagrams for before and after the flip and labeled the vertices (a, b, c, d), edges (e1-e4), half-edges (h1-h6), and faces (f1, f2). I used these diagrams to figure out all the pointer changes (which half-edge each vertex/edge/face should point to and all the pointers for half-edges). I was then able to just make these pointer changes in the code. There were no interesting tricks I used because this function worked immediately. There was no debugging necessary.<br>
+		<img src='part_4_before.png' height='200'><img src='part_4_after.png' height='200'><br><br>
+		<div class="pagebreak"> </div>
 	</body>
 </html>
