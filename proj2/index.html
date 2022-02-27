@@ -32,13 +32,20 @@
 		<div class="pagebreak"> </div>
 
 		Part 3<br>
-		I computed the area-weighted normals for each face by first getting the vertex position for the current halfedge, for the next halfedge, and for the next next halfedge. This gives me all 3 vertex positions for the current face. I can then take the cross product of the p2 - p1 and p3 - p1 vectors to get the area-weighted normal for the current face. Then, I looped over all the faces (similarly to printNeighbourPositions) and summed and normalized the normals for each face to get the final result.<br>
+		I computed the area-weighted normals for each face by first getting the vertex position for the current halfedge, for the next halfedge, and for the next next halfedge. This gives me all 3 vertex positions for the current face. I can then take the cross product of the p2 - p1 and p3 - p1 vectors to get the area-weighted normal for the current face. Then, I looped over all the faces (similarly to printNeighbourPositions) and summed and normalized the normals for each face to get the final result.<br><br>
 		<img src='part_3_flat.png' height='200'><img src='part_3_phong.png' height='200'><br><br>
 		<div class="pagebreak"> </div>
 
 		Part 4<br>
-		I drew out two diagrams for before and after the flip and labeled the vertices (a, b, c, d), edges (e1-e4), half-edges (h1-h6), and faces (f1, f2). I used these diagrams to figure out all the pointer changes (which half-edge each vertex/edge/face should point to and all the pointers for half-edges). I was then able to just make these pointer changes in the code. There were no interesting tricks I used because this function worked immediately. There was no debugging necessary.<br>
+		I drew out two diagrams for before and after the flip and labeled the vertices (a, b, c, d), edges (e1-e5), half-edges (h1-h6), and faces (f1, f2). I used these diagrams to figure out all the pointer changes (which half-edge each vertex/edge/face should point to and all the pointers for half-edges). I was then able to just make these pointer changes in the code. There were no interesting tricks I used because this function worked immediately. There was no debugging necessary.<br><br>
 		<img src='part_4_before.png' height='200'><img src='part_4_after.png' height='200'><br><br>
+		<div class="pagebreak"> </div>
+
+		Part 5<br>
+		Similarly to part 4, I drew out two diagrams for before and after the split and labeled the vertices (a-d, m), edges (e1-e8), half-edges (h1-h12), and faces (f1-f4). I used these diagrams to figure out how many of each element I needed to create and to figure out what all the pointer values should be. In my code, I then simply created the new elements and assigned all the pointers. I got the midpoint by averaging the positions of the two vertices adjacent to the edge. There were no interesting tricks I used because this function worked immediately. There was no debugging necessary.<br>
+		in order: before splits, after splits, before splits and flips, after splits and flips<br><br>
+		<img src='part_5_before_1.png' height='200'><img src='part_5_after_1.png' height='200'><br>
+		<img src='part_5_before_2.png' height='200'><img src='part_5_after_2.png' height='200'><br><br>
 		<div class="pagebreak"> </div>
 	</body>
 </html>
