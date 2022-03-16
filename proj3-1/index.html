@@ -1,7 +1,28 @@
 <html>
+	<style>
+	@media print {
+	    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+	}
+	#images{
+    	text-align:center;
+    	margin:50px auto; 
+	}
+	#images a{
+	    margin:0px 20px;
+	    display:inline-block;
+	    text-decoration:none;
+	    color:black;
+	}
+	</style>
 	<head>
 	</head>
 	<body>
-		Project 3-1 here
+		Part 1<br>
+		To generate a ray we first map a point in image space to a point on the sensor in camera space using the horizontal and vertical field of view. This gives us the direction for the ray. We can then use the camera-to-world rotation matrix to get our final ray in world space. Then we need to figure out the radiance for each pixel in image space. We can do this by using our generated rays to figure out the radiance along the ray and using Monte Carlo sampling to estimate the overall radiance for each pixel.<br>
+		To find the intersections a ray has with a triangle or sphere, we can simply apply the formulas from lecture slides, which factor in things such as the points of the triangle, center and radius of the sphere, and origin and direction of the ray. Doing this gives us points of intersection as well as the time of the intersection. We can use the point of intersection to render the image. We can use the time of intersection to only account for the closest intersection, so that objects properly block rays from hitting further objects.<br>
+		The triangle intersection algorithm I used was the Moller Trumbore Algorithm from Lecture 9. This algorithm factors in the points of the triangle and the origin and direction of the ray to give us t (time of intersection) and b1 and b2 (barycentric coordinates for the intersection point).<br><br>
+		<img src='part_1_1.png' width='350'><img src='part_1_2.png' width='350'><br>
+		<img src='part_1_3.png' width='350'><img src='part_1_4.png' width='350'><br><br>
+		<div class="pagebreak"> </div>
 	</body>
 </html>
