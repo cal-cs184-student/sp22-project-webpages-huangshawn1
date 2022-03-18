@@ -44,7 +44,25 @@
 		in order: 1 light ray, 4 light rays, 16 light rays, 64 light rays<br><br>
 		<img src='part_3_3_1.png' width='350'><img src='part_3_3_4.png' width='350'><br>
 		<img src='part_3_3_16.png' width='350'><img src='part_3_3_64.png' width='350'><br><br>
-		Hemisphere sampling creates many dark spots all over the image because with only one area light at the top of the box it's somewhat likely we never sample the light even if we take many samples. In contrast, lighting sampling guarantees we send a ray in the direction of a light for every sample so we see much more consistent results across the pixels. There aren't spots where we got unlucky and never sampled a light. We can clearly see this when comparing the bunny and lambertian sphere renderings shown above. The left (hemisphere) images have spots all over where our uniform sampling never hit the light while the right (importance) images are very smooth.
+		Hemisphere sampling creates many dark spots all over the image because with only one area light at the top of the box it's somewhat likely we never sample the light even if we take many samples. In contrast, lighting sampling guarantees we send a ray in the direction of a light for every sample so we see much more consistent results across the pixels. There aren't spots where we got unlucky and never sampled a light. We can clearly see this when comparing the bunny and lambertian sphere renderings shown above. The left (hemisphere) images have spots all over where our uniform sampling never hit the light while the right (importance) images are very smooth.<br><br>
 
+		<div class="pagebreak"> </div>
+
+		Part 4<br>
+		We first set the ray depth to be the max depth in raytrace_pixel. In at_least_one_bounce_radiance we immediately return the 0 vector if depth is <= 0. We then flip a coin with 0.65 chance to continue (0.35 termination) and if the flip is false we return just the one_bounce_radiance. Otherwise, we cast a ray in a random direction with sample_f and find the next intersection. If there is no intersection we return the one_bounce_radiance. Otherwise, we recursively call at_least_one_bounce_radiance on the next intersection and ray, making sure to set the depth of the new ray to the depth of the old ray - 1. We plug the radiance we get from this recursive call into the reflection equation (same as previous parts but we also divide by 0.65, the continuation probability). Finally, we return the one_bounce_radiance + the value from the reflection equation.<br><br>
+		global illumination 1024 samples per pixel (-s 1024 -l 4 -m 5 -r 480 360):<br><br>
+		<img src='spheres_1024.png' width='350'><img src='cb_bunny_1024.png' width='350'><br>
+		<img src='dragon_1024.png' width='350'><img src='bench_1024.png' width='350'><br><br>
+		only direct illumination vs only indirect illumination (-s 1024 -l 4 -m 5 -r 480 360):<br><br>
+		<img src='spheres_direct.png' width='350'><img src='spheres_indirect.png' width='350'><br><br>
+		CBbunny different max ray depths (-s 1024 -l 4 -r 480 360) in order: 0, 1, 2, 3, 100<br><br>
+		<img src='cb_bunny_depth_0.png' width='350'><img src='cb_bunny_depth_1.png' width='350'><br>
+		<img src='cb_bunny_depth_2.png' width='350'><img src='cb_bunny_depth_3.png' width='350'><br>
+		<img src='cb_bunny_depth_100.png' width='350'><br><br>
+		different sample-per-pixel rates in order (-l 4 -m 5 -r 480 360): 1, 2, 4, 8, 16, 64, 1024<br><br>
+		<img src='spheres_1.png' width='350'><img src='spheres_2.png' width='350'><br>
+		<img src='spheres_4.png' width='350'><img src='spheres_8.png' width='350'><br>
+		<img src='spheres_16.png' width='350'><img src='spheres_64.png' width='350'><br>
+		<img src='spheres_1024.png' width='350'><br><br>
 	</body>
 </html>
