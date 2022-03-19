@@ -28,22 +28,23 @@
 
 		Part 2<br>
 		To construct the BVH we first loop through all primitives, expanding the bounding box to include all of them and figuring out the minimum and maximum x, y, and z values. If we have few enough primitives we can just return a leaf node. Otherwise, we find the longest axis based on the minimum and maximum values and split this axis in half geometrically. We then partition all our primitives into a left and right portion based on this midpoint and recursively construct the left and right nodes accordingly.<br>
-		I rendered the dragon in 1.0605s, Lucy in 0.8509s, the bunny in 0.9220s, and the blob in 2.0438s (64 samples, 480x360, 8 threads).<br><br>
+		normal shading with BVH (-s 64 -r 480 360), dragon in 1.2973s, CBlucy in 1.0255s, CBBunny in 0.9423s, blob in 1.8825s:<br><br>
 		<img src='part_2_1.png' width='350'><img src='part_2_2.png' width='350'><br>
 		<img src='part_2_3.png' width='350'><img src='part_2_4.png' width='350'><br><br>
-		I rendered a few images with 8 threads at 800x600. The cow took 6.8793s without BVH and 0.0477s with. The beetle took 9.4634s without and 0.0305s with. The beast took 117.1420s without and 0.0373s with. The bunny took 65.5403s without and 0.0367s with. As we can see BVH makes a huge difference for these renderings. While the more complex renderings quickly scaled up to take 1-2 minutes without BVH, the time it took with BVH stayed relatively similar at only 0.03-0.04 seconds.<br><br>
+		Results when using parameters -t 8 -r 800 600. The cow took 6.8793s without BVH and 0.0477s with. The beetle took 9.4634s without and 0.0305s with. The beast took 117.1420s without and 0.0373s with. The bunny took 65.5403s without and 0.0367s with. As we can see BVH makes a huge difference for these renderings. While the more complex renderings quickly scaled up to take 1-2 minutes without BVH, the time it took with BVH stayed relatively similar at only 0.03-0.04 seconds.<br><br>
 
 		<div class="pagebreak"> </div>
 
 		Part 3<br>
 		For hemisphere direct lighting we generate n (number_of_lights * ns_area_light) samples to get a Monte Carlo estimate. For each sample we get a random direction uniformly across the hemisphere by using hemisphereSampler. We then cast a ray in this direction from the given intersection point to determine the radiance coming from that random direction. After that we apply the reflection equation, plugging in the incoming and outgoing vectors, the radiance coming from the random direction, and the pdf (1 / (2 pi)). We sum the values for all the samples and divide by the number of samples to finish our Monte Carlo estimate.<br>
-		For the importance sampling version, we generate ns_area_light samples per area light and one sample per point light to get a Monte Carlo estimate. For each sample we use sample_L to sample a random point on the light and cast a ray. If the ray has an intersection, there is no direct path to the light so we don't add to the total radiance. Otherwise, we add the radiance from the light using the reflection equation. We sum all the sample values and divide by the number of samples to finish.<br>
+		For the importance sampling version, we generate ns_area_light samples per area light and one sample per point light to get a Monte Carlo estimate. For each sample we use sample_L to sample a random point on the light and cast a ray towards that point. If the ray has an intersection, there is no direct path to the light so we don't add to the total radiance. Otherwise, we add the radiance from the light using the reflection equation. We sum all the sample values and divide by the number of samples to finish.<br>
 		in order: CBbunny hemisphere, CBbunny importance, lambertian spheres hemisphere, lambertian spheres importance<br><br>
 		<img src='part_3_1_h.png' width='350'><img src='part_3_1_i.png' width='350'><br>
 		<img src='part_3_2_h.png' width='350'><img src='part_3_2_i.png' width='350'><br><br>
 		in order: 1 light ray, 4 light rays, 16 light rays, 64 light rays<br><br>
 		<img src='part_3_3_1.png' width='350'><img src='part_3_3_4.png' width='350'><br>
 		<img src='part_3_3_16.png' width='350'><img src='part_3_3_64.png' width='350'><br><br>
+		We can see the noise levels decrease across the entire image when increasing the number of light rays, but this is especially apparent in the soft shadows, such as the area to the left of the rabbit. In the first image we see scattered black spots, while in the last image we see soft shadows and not as much noise even with only 1 sample per pixel.<br>
 		Hemisphere sampling creates many dark spots all over the image because with only one area light at the top of the box it's somewhat likely we never sample the light even if we take many samples. In contrast, lighting sampling guarantees we send a ray in the direction of a light for every sample so we see much more consistent results across the pixels. There aren't spots where we got unlucky and never sampled a light. We can clearly see this when comparing the bunny and lambertian sphere renderings shown above. The left (hemisphere) images have spots all over where our uniform sampling never hit the light while the right (importance) images are very smooth.<br><br>
 
 		<div class="pagebreak"> </div>
@@ -64,5 +65,13 @@
 		<img src='spheres_4.png' width='350'><img src='spheres_8.png' width='350'><br>
 		<img src='spheres_16.png' width='350'><img src='spheres_64.png' width='350'><br>
 		<img src='spheres_1024.png' width='350'><br><br>
+
+		<div class="pagebreak"> </div>
+
+		Part 5<br>
+		For adaptive sampling we start with the same ray tracing from part 1. We keep track of the total illuminance and the sum of squared illuminances as we loop. If our sample number is a multiple of the samplesBerPatch (other than 0), we check if the stop condition is met by applying the given formulas. If we hit the stop condition we update num_samples to be the current number of samples and break. Otherwise num_samples remains as ns_aa. Everything else remains the same.<br>
+		adaptive sampling image and rate (-s 2048 -a 64 0.05 -l 1 -m 5 -r 480 360):<br><br>
+		<img src='part_5_1.png' width='350'><img src='part_5_2.png' width='350'><br><br>
+		website link: <a href="https://cal-cs184-student.github.io/sp22-project-webpages-huangshawn1/">https://cal-cs184-student.github.io/sp22-project-webpages-huangshawn1/</a>
 	</body>
 </html>
