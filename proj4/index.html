@@ -1,7 +1,35 @@
 <html>
+	<style>
+	@media print {
+	    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+	}
+	#images{
+    	text-align:center;
+    	margin:50px auto; 
+	}
+	#images a{
+	    margin:0px 20px;
+	    display:inline-block;
+	    text-decoration:none;
+	    color:black;
+	}
+	</style>
 	<head>
 	</head>
 	<body>
-		Project 4 here
+		Part 1<br>
+		in order: without shearing, only shearing, all constraints<br><br>
+		<img src='part_1_wo_shear.png' width='350'><img src='part_1_shear.png' width='350'><br>
+		<img src='part_1_all.png' width='350'><br><br>
+		<div class="pagebreak"> </div>
+
+		Part 2<br>
+		With a low ks the cloth falls more loosely and has more ripples while with a high ks it is much more taut with fewer ripples/wrinkles. With low density the cloth was very smooth while with high density it had many wrinkles and sagged more. With low damping the cloth swings back and forth with more force and falls more quickly before coming to a rest. With high damping the cloth falls very slowly and comes to a rest without swinging back and forth. Changing damping didn't affect the end result.<br>
+		in order: default parameters, ks=100, ks=10000, density=1, density=100, damping=0.1 while falling, damping=0.8 while falling, pinned_4<br>
+		<img src='part_2_default.png' width='350'><img src='part_2_ks_100.png' width='350'><br>
+		<img src='part_2_ks_10000.png' width='350'><img src='part_2_density_1.png' width='350'><br>
+		<img src='part_2_density_100.png' width='350'><img src='part_2_damp_0.1.png' width='350'><br>
+		<img src='part_2_damp_0.8.png' width='350'><<img src='part_2_pinned_4.png' width='350'><br><br>
+		<div class="pagebreak"> </div>
 	</body>
 </html>
