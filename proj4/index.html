@@ -37,6 +37,7 @@
 		in order: ks=default, ks=500, ks=50000, plane<br><br>
 		<img src='part_3_default.png' width='350'><img src='part_3_500.png' width='350'><br>
 		<img src='part_3_50000.png' width='350'><img src='part_3_plane.png' width='350'><br><br>
+		<div class="pagebreak"> </div>
 
 		Part 4<br>
 		default falling:<br><br>
@@ -46,5 +47,22 @@
 		in order: density=1, density=100, ks=500, ks=50000<br>
 		<img src='part_4_density_1.png' width='350'><img src='part_4_density_100.png' width='350'><br>
 		<img src='part_4_ks_500.png' width='350'><img src='part_4_ks_50000.png' width='350'><br><br>
+		<div class="pagebreak"> </div>
+
+		Part 5<br>
+		A shader program shades an object to give it a different appearance, such as bumps or different materials. Vertex shaders work to get geometric properties like position and normal vectors. These geometric properties allow the fragment shaders to get the color at that point.<br>
+		Blinn-Phong shading involves adding the ambient, diffuse, and specular components to get the overall reflection of an object.<br>
+		in order: ambient, diffuse, specular, all combined, custom texture<br><br>
+		<img src='part_5_ambient.png' width='350'><img src='part_5_diffuse.png' width='350'><br>
+		<img src='part_5_specular.png' width='350'><img src='part_5_phong.png' width='350'><br>
+		<img src='part_5_texture.png' width='350'><br><br>
+		Bump mapping perturbs the normal to make it look like there are bumps while displacement mapping perturbs the positions themselves. We can see this in the renderings because the displacement mapping sphere/cloth look wavy. We can also see that with higher resolution the spheres look somewhat smoother.<br>
+		in order: bump, displacement, bump -o 16 -a 16, displacement -o 16 -a 16, bump -o 128 -a 128, displacement -o 128 -a 128<br><br>
+		<img src='part_5_bump.png' width='350'><img src='part_5_displacement.png' width='350'><br>
+		<img src='part_5_bump_16.png' width='350'><img src='part_5_displacement_16.png' width='350'><br>
+		<img src='part_5_bump_128.png' width='350'><img src='part_5_displacement_128.png' width='350'><br><br>
+		mirror<br><br>
+		<img src='part_5_mirror.png' width='350'><br><br>
+		website link: <a href="https://cal-cs184-student.github.io/sp22-project-webpages-huangshawn1/">https://cal-cs184-student.github.io/sp22-project-webpages-huangshawn1/</a>
 	</body>
 </html>
