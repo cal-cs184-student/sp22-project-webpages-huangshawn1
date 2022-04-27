@@ -1,0 +1,47 @@
+<html>
+	<style>
+	#images{
+    	text-align:center;
+    	margin:50px auto; 
+	}
+	#images a{
+	    margin:0px 20px;
+	    display:inline-block;
+	    text-decoration:none;
+	    color:black;
+	}
+	</style>
+	<head>
+	</head>
+	<body>
+		<h2>Accomplished So Far</h2>
+		<ul>
+		  	<li>Conducted research and devised a general algorithm that should more efficiently do ray-tracing for moving light sources</li>
+			<li>Looked over the ray-tracing code from Proj3-1 and devised a plan on how to revise this starter code in order to implement our algorithm</li>
+			<li>Created a plan to split up the work equally amongst group members, switching off between coding and creating reports</li>
+			<li>Modified the Proj3-1 to support our algorithm by storing each pixel's value as a function of the light source</li>
+			<li>Implemented our algorithm, which successfully renders the images using our new method</li>
+		</ul>
+		<h2>Preliminary Results</h2>
+		Our new algorithm still successfully renders the Proj3-1 images, which is good because it means that our algorithm at least logically works. However, we haven’t been able to test the actual speed-up because we haven't yet figured out how to programatically move our light source. Our algorithm only saves time if a light moves, so we must first figure out how to accomplish that.
+		<h2>Work Plan</h2>
+		Our goals for Week 1 and 2 were:<br>
+		Week 1:<br>
+		<ul>
+			<li>Research academic papers and online resources</li>
+			<li>Fully hash out a plan for how we are precomputing the rays and what information needs to be stored to allow real time rendering with moving light sources</li>
+			<li>Revise Project 3 code and prepare to build upon it</li>
+		</ul>
+		Week 2:<br>
+		<ul>
+			<li>Write code to precompute and store necessary information</li>
+			<li>Write code to use stored information to allow for moving light</li>
+			<li>Test out the computation speed and improve computation efficiency as much as possible to prepare for real time rendering</li>
+		</ul>
+		From our plan, we completed all of the Week 1 goals and most of the Week 2 goals. The only week 2 goal we missed was being able to test the computation speed and efficiency. However, we finished the other Week 2 goals: writing code to precompute and store the necessary information to render the images correctly. The reason we can’t test the speed yet is that we couldn’t find a way to move the light without changing the DAE files themselves and restarting the program. As such, we need to figure out how to programatically alter the light source. Overall, this is good progress because we’ve essentially finished the implementation (though, it’s possible there are errors or it’s not as efficient as we hoped), and we had planned for week 3 to be spent debugging and resolving any potential problems anyways.<br>
+		Our work plan slightly changes, as we can’t test the computation speed and efficiency until we can move the light using code. As such, our goal would be to figure out how to move the light around as soon as possible, as it’s possible that once we test our speed and efficiency it might not yield the results we want and we might have to go back to the implementation. However, if our solution does work as it is right now, then we are in an extremely good position as that would mean the bulk of our implementation is done at this point.<br>
+		<h2>Links</h2>
+		<a href="https://drive.google.com/file/d/11Emj9qJOrmdyayXRLxEk-cG3osqsDm7P/view?usp=sharing">Video</a><br>
+		<a href="https://docs.google.com/presentation/d/1SbQ3-YJxiEbsRjpNvxN3XYvI-H-Ewso5CgW4s4yBWdk/edit?usp=sharing">Slides</a>
+	</body>
+</html>
